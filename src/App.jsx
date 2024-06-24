@@ -2,14 +2,20 @@ import React, { useRef, useEffect, useState } from "react";
 import Experience from "./Experience";
 import "./App.css";
 import { Canvas } from "@react-three/fiber";
-import FirstSection from "./components/FirstSection";
+import FirstSection from "./components/Sections/FirstSection";
+import ThirdSections from "./components/Sections/ThirdSections";
+import FourthSections from "./components/Sections/FourthSections";
+import SecondSection from "./components/Sections/SecondSection";
+import { Html, Loader, useProgress } from "@react-three/drei";
+import { Suspense } from "react";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
 
 export default function App() {
   const pages = [
     { id: "first", content: <FirstSection /> },
-    { id: "second", content: "SECOND" },
-    { id: "third", content: "THIRD" },
-    { id: "third", content: "THIRD" },
+    { id: "second", content: <SecondSection /> },
+    { id: "third", content: <ThirdSections /> },
+    { id: "third", content: <FourthSections /> },
   ];
 
   const canvasStyle = {
@@ -67,10 +73,6 @@ export default function App() {
     };
   }, [htmlWidth]);
 
-  console.log("Total Rotation:", totalRotation);
-  console.log("Scroll Position:", scrollPosition);
-  console.log("HTML Width:", htmlWidth);
-
   return (
     <>
       <Canvas style={canvasStyle}>
@@ -81,6 +83,7 @@ export default function App() {
           pagesLength={pages.length}
         />
       </Canvas>
+      <Loader />
       <div
         className="htmlWrapper"
         style={{ overflowX: "scroll", display: "flex", width: "100vw" }}
