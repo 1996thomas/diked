@@ -1,18 +1,10 @@
-import { Environment, Float, useGLTF } from "@react-three/drei";
-import Model from "./Model";
+import { Environment, Float } from "@react-three/drei";
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import * as THREE from "three";
 import Rock from "./components/Models/Rock";
 import Puce from "./components/Models/Puce";
 import Metal from "./components/Models/Metal";
-
-// const models = [
-//   { url: "/ptitepute3.glb", color: 0x00f0ff, texture: "/rock.jpg" },
-//   { url: "/ptitepute1.glb", color: 0x00ff00, texture: "/rock.jpg" },
-//   { url: "/ptitepute2.glb", color: 0x0000ff, texture: "/rock.jpg" },
-//   { url: "/ptitepute0.glb", color: 0xffffff, texture: "/rock.jpg" },
-// ];
 
 export default function Experience({
   rotationY,
@@ -21,8 +13,11 @@ export default function Experience({
   pagesLength,
 }) {
   const modelRef = useRef();
-  const [opacities, setOpacities] = useState(Array(pagesLength).fill(0));
+  const [opacities, setOpacities] = useState(Array(pagesLength).fill(1));
 
+  console.log('rotY',rotationY)
+  console.log('htmlWidth',htmlWidth)
+  console.log('scrollPos',scrollPosition)
   useEffect(() => {
     if (modelRef.current) {
       gsap.to(modelRef.current.rotation, {
@@ -54,24 +49,13 @@ export default function Experience({
     <>
       <Environment preset="apartment" />
       <ambientLight color={"blue"} intensity={1000} />
-      <Float>
+      <Float speed={10}>
         <group ref={modelRef}>
-          <Rock opacity={opacities[0]}/>
-          <Puce opacity={opacities[1]}/>
-          <Metal opacity={opacities[2]}/>
-          {/* {models.map((model, index) => (
-            <Model
-              key={index}
-              url={model.url}
-              color={model.color}
-              opacity={opacities[index]}
-              texture={model.texture}
-            />
-          ))} */}
+          <Rock opacity={opacities[0]} />
+          <Puce opacity={opacities[1]} />
+          <Metal opacity={opacities[2]} />
         </group>
       </Float>
     </>
   );
 }
-
-// models.map((model) => useGLTF.preload(model.url));

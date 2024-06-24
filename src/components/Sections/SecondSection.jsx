@@ -1,8 +1,9 @@
-
-import React from 'react'
+import React from "react";
 
 export default function SecondSection() {
   return (
-    <div>SecondSection</div>
-  )
+    <section>
+      <h2>Based in Paris</h2>
+    </section>
+  );
 }

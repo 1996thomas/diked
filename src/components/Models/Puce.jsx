@@ -6,8 +6,6 @@ export default function Puce({ opacity }) {
   const { scene } = useGLTF("/ptitepute1.glb");
   const modelRef = useRef();
 
-  console.log(opacity);
-
   useEffect(() => {
     const normalTexture = new THREE.TextureLoader().load("/puce.jpg");
     // const displacementTexture = new THREE.TextureLoader().load("/puce.jpg");

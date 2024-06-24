@@ -1,14 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 import Experience from "./Experience";
-import "./App.css";
+import "./App.scss";
 import { Canvas } from "@react-three/fiber";
 import FirstSection from "./components/Sections/FirstSection";
 import ThirdSection from "./components/Sections/ThirdSection";
-import FourthSections from "./components/Sections/FourthSections";
 import SecondSection from "./components/Sections/SecondSection";
-import { Html, Loader, useProgress } from "@react-three/drei";
-import { Suspense } from "react";
-import { Bloom, EffectComposer } from "@react-three/postprocessing";
+import { Loader } from "@react-three/drei";
+import Nav from "./components/Nav";
 
 export default function App() {
   const pages = [
@@ -22,6 +20,7 @@ export default function App() {
     zIndex: "1000",
     pointerEvents: "none",
   };
+
 
   const htmlDivRef = useRef();
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -47,22 +46,18 @@ export default function App() {
     updateHtmlWidth();
     window.addEventListener("resize", updateHtmlWidth);
 
-    // Ensure to remove the event listener on cleanup
     return () => {
       window.removeEventListener("resize", updateHtmlWidth);
     };
   }, [pages.length]);
 
   useEffect(() => {
-    if (htmlWidth > 0) {
-      handleScroll(); // Set initial rotation and scroll position after htmlWidth is set
-    }
-  }, [htmlWidth]);
-
-  useEffect(() => {
     const htmlWrapper = htmlDivRef.current;
     if (htmlWrapper) {
       htmlWrapper.addEventListener("scroll", handleScroll, { passive: true });
+
+      // Initial scroll handling to set the initial rotation properly
+      handleScroll();
     }
 
     return () => {
@@ -74,6 +69,7 @@ export default function App() {
 
   return (
     <>
+      <Nav />
       <Canvas style={canvasStyle}>
         <Experience
           rotationY={totalRotation}
@@ -83,11 +79,12 @@ export default function App() {
         />
       </Canvas>
       <Loader />
+
       <div
         className="htmlWrapper"
         style={{ overflowX: "scroll", display: "flex", width: "100vw" }}
       >
-        <div className="main__wrapper" ref={htmlDivRef}>
+        <div className="main__wrapper" ref={htmlDivRef} onWheel={handleScroll}>
           {pages.map((page, index) => (
             <section key={index} id={page.id} className="page">
               {page.content}
