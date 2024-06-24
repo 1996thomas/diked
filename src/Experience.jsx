@@ -25,7 +25,6 @@ export default function Experience({
       gsap.to(modelRef.current.rotation, {
         y: THREE.MathUtils.degToRad(rotationY),
         duration: 1,
-        ease: "power3.out",
       });
     }
   }, [rotationY]);
