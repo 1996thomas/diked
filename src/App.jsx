@@ -15,7 +15,6 @@ export default function App() {
     { id: "first", content: <FirstSection /> },
     { id: "second", content: <SecondSection /> },
     { id: "third", content: <ThirdSections /> },
-    { id: "third", content: <FourthSections /> },
   ];
 
   const canvasStyle = {

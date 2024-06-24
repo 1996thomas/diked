@@ -3,13 +3,16 @@ import Model from "./Model";
 import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import * as THREE from "three";
+import Rock from "./components/Models/Rock";
+import Puce from "./components/Models/Puce";
+import Metal from "./components/Models/Metal";
 
-const models = [
-  { url: "/ptitepute0.glb", color: 0x000000 },
-  { url: "/ptitepute1.glb", color: 0x00ff00 },
-  { url: "/ptitepute2.glb", color: 0x0000ff },
-  { url: "/ptitepute3.glb", color: 0x00f0ff },
-];
+// const models = [
+//   { url: "/ptitepute3.glb", color: 0x00f0ff, texture: "/rock.jpg" },
+//   { url: "/ptitepute1.glb", color: 0x00ff00, texture: "/rock.jpg" },
+//   { url: "/ptitepute2.glb", color: 0x0000ff, texture: "/rock.jpg" },
+//   { url: "/ptitepute0.glb", color: 0xffffff, texture: "/rock.jpg" },
+// ];
 
 export default function Experience({
   rotationY,
@@ -50,21 +53,25 @@ export default function Experience({
   return (
     <>
       <Environment preset="apartment" />
-      <ambientLight color={"red"} intensity={1} />
+      <ambientLight color={"blue"} intensity={1000} />
       <Float>
         <group ref={modelRef}>
-          {models.map((model, index) => (
+          <Rock opacity={opacities[0]}/>
+          <Puce opacity={opacities[1]}/>
+          <Metal opacity={opacities[2]}/>
+          {/* {models.map((model, index) => (
             <Model
               key={index}
               url={model.url}
               color={model.color}
               opacity={opacities[index]}
+              texture={model.texture}
             />
-          ))}
+          ))} */}
         </group>
       </Float>
     </>
   );
 }
 
-models.map((model) => useGLTF.preload(model.url));
+// models.map((model) => useGLTF.preload(model.url));
