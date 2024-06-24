@@ -3,7 +3,7 @@ import Experience from "./Experience";
 import "./App.css";
 import { Canvas } from "@react-three/fiber";
 import FirstSection from "./components/Sections/FirstSection";
-import ThirdSections from "./components/Sections/ThirdSections";
+import ThirdSection from "./components/Sections/ThirdSection";
 import FourthSections from "./components/Sections/FourthSections";
 import SecondSection from "./components/Sections/SecondSection";
 import { Html, Loader, useProgress } from "@react-three/drei";
@@ -14,7 +14,7 @@ export default function App() {
   const pages = [
     { id: "first", content: <FirstSection /> },
     { id: "second", content: <SecondSection /> },
-    { id: "third", content: <ThirdSections /> },
+    { id: "third", content: <ThirdSection /> },
   ];
 
   const canvasStyle = {

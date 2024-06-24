@@ -18,7 +18,6 @@ html {
   padding: 0;
   width: 100%;
   height: 100%;
-  height: 200vh;
 }
 
 
@@ -41,7 +40,8 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2em;
+  font-size: clamp(3rem, 10vw, 20rem);
+  font-weight: 900;
   position: relative;
 }
 
